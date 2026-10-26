@@ -1,0 +1,6 @@
+step,sessions,drop_off_pct
+cart,100000,0
+login_or_guest,81000,19
+address,59100,27
+payment,45500,23
+order_placed,41000,10

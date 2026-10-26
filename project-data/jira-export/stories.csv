@@ -1,0 +1,11 @@
+Key,Summary,Status,Priority,Epic,Description
+CHK-101,Guest checkout,To Do,High,Checkout Revamp,"Allow purchase without account; capture email + phone; offer account creation after order"
+CHK-102,Address autocomplete,To Do,High,Checkout Revamp,"Google Places autocomplete; validate pincode serviceability via logistics API"
+CHK-103,UPI intent payment,In Progress,High,Checkout Revamp,"Open UPI apps on mobile; QR on desktop; 5-minute timeout"
+CHK-104,COD eligibility,To Do,Medium,Checkout Revamp,"COD only if order value <= 10000 and pincode COD-enabled"
+CHK-105,Coupon validation,To Do,Medium,Checkout Revamp,"One coupon per order; show reason when invalid (expired, min value, category)"
+CHK-106,Payment retry,To Do,High,Checkout Revamp,"On failure keep cart + address; allow switching method; max 3 retries in 30 min"
+CHK-107,Order events,To Do,High,Checkout Revamp,"Publish order.created / payment.initiated / order.paid / order.failed with gateway_txn_id and attempt_no"
+CHK-108,Delivery estimate,To Do,Medium,Checkout Revamp,"Show estimated delivery date from logistics API in step 1 and confirmation"
+CHK-109,A/B instrumentation,To Do,Medium,Checkout Revamp,"Feature flag checkout_v2; events for each step view and drop"
+CHK-110,Accessibility fixes,To Do,High,Checkout Revamp,"Fix 14 WCAG failures from audit; labels on payment options"

@@ -1,0 +1,6 @@
+id,type,description,impact,owner,status
+RSK-001,Risk,Spring sale code freeze from 2027-02-20 limits rollout window,High,PO,Open
+RSK-002,Risk,Logistics serviceability API p95 900 ms slows step 1,Medium,Logistics Integration Manager,Open
+ISS-001,Issue,COD new-customer limit undecided,Medium,Finance Controller,Open
+DEP-001,Dependency,PayU production keys for fallback,,Payments Lead,Open
+ASM-001,Assumption,Google Places API quota sufficient for 3000 orders/min peak,,Front-end Lead,To verify
