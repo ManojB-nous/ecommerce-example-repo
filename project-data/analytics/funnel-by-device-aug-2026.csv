@@ -1,0 +1,11 @@
+device,step,sessions,drop_off_pct
+mobile,cart,70000,0
+mobile,login_or_guest,55300,21
+mobile,address,38700,30
+mobile,payment,29000,25
+mobile,order_placed,25200,13
+desktop,cart,30000,0
+desktop,login_or_guest,25700,14
+desktop,address,20400,21
+desktop,payment,16500,19
+desktop,order_placed,15800,4

@@ -61,5 +61,10 @@ query: "compliance regulatory security privacy audit" -->
 <!-- astra:section id=open_questions
 query: "open questions TBD pending decision action items" -->
 
-## 11. Sources
+## 11. Glossary
+<!-- astra:section id=glossary
+query: "glossary terms definitions acronyms"
+prefer: project-data/glossary.md -->
+
+## 12. Sources
 <!-- astra:auto  list of [S#] → path@commit -->

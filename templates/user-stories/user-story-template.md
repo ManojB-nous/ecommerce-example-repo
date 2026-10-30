@@ -19,3 +19,9 @@ nomenclature: [NOM-GEN-*, NOM-DOC-*, NOM-ID-*, NOM-US-*]
 - **Traces to:** BR-...
 - **Acceptance criteria (Given/When/Then):**
 - **Story points:** TBD
+
+## Definition of Ready
+- Source cited, acceptance criteria written in Given / When / Then, dependencies named, open questions listed.
+
+## Definition of Done
+- Acceptance criteria tested, accessibility checked (WCAG 2.1 AA), audit logging confirmed where records change, and the story traces to a BR.

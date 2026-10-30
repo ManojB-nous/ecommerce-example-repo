@@ -1,0 +1,374 @@
+# golden.yaml - Astra manifest for the golden repository (schema v1)
+#
+# This file does not hold content. It says WHEN each rule section applies and which template is the default.
+# Content lives in the markdown files, one rule per heading. Every problem in this file is shown as a warning by Astra
+# and the item falls back to conventions, so a mistake here never blocks a connect.
+#
+# Selection levels used below:
+#   always: true   -> included in every response, whatever the request
+#   applies_to     -> included when the request's doc type, stage and tags all match (an omitted list means "any")
+#   (not listed)   -> chosen by relevance to the request text
+#
+# Owner of this file: PMO & Quality Office. Changes go through a pull request reviewed by the PMO and the Security Architect.
+
+version: 1
+
+repo:
+  name: ecommerce-checkout-revamp
+  project_code: CHK
+  owner: PMO & Quality Office
+
+# Document types Astra can generate. Names must match the folder or file name under templates/ (case-insensitive);
+# aliases are phrases a request may use.
+doc_types:
+  BRD:
+    aliases: [business requirements, business requirements document]
+  SPEC:
+    aliases: [functional spec, functional specification, fsd, api spec, api specification]
+  TESTCASES:
+    aliases: [test cases, test case, test scenarios]
+  USER-STORIES:
+    aliases: [user stories, stories, backlog]
+  TEST-PLAN:
+    aliases: [test plan, test strategy]
+  CHANGE-REQUEST:
+    aliases: [change request, cr, impact assessment]
+
+# Project lifecycle stages (placeholder vocabulary until the ASTRA stage names are confirmed).
+stages: [discovery, requirements, design, build, test, release]
+
+# Subject tags. Rules and templates use these in applies_to; requests may pass them or Astra infers them.
+tags:
+  - payments
+  - checkout
+  - coupons
+  - cod
+  - refunds
+  - security
+  - privacy
+  - accessibility
+  - ux
+  - logistics
+  - api
+  - performance
+  - governance
+
+rules:
+  # ---- policies.md: company-wide behaviour rules (mandatory for every response) --------------------------------
+  - file: policies.md
+    section: "1. Confidentiality & Data Classification"
+    always: true
+    priority: 10
+  - file: policies.md
+    section: "2. Personal Data & Privacy"
+    always: true
+    priority: 10
+  - file: policies.md
+    section: "3. Accuracy & Grounding"
+    always: true
+    priority: 10
+  - file: policies.md
+    section: "4. Tone, Language & Style"
+    always: true
+    priority: 20
+  - file: policies.md
+    section: "5. Legal & Commercial Boundaries"
+    always: true
+    priority: 10
+  - file: policies.md
+    section: "6. Security by Default"
+    always: true
+    priority: 10
+  - file: policies.md
+    section: "7. Approved Technology"
+    applies_to: {doc_types: [BRD, SPEC, TEST-PLAN], stages: [requirements, design, build]}
+    priority: 20
+  - file: policies.md
+    section: "8. Regulated Domains"
+    always: true
+    priority: 10
+  - file: policies.md
+    section: "9. Human Review & Accountability"
+    always: true
+    priority: 10
+  - file: policies.md
+    section: "10. Conflicts & Escalation"
+    always: true
+    priority: 10
+  - file: policies.md
+    section: "11. Accessibility & Inclusion"
+    always: true
+    priority: 20
+  - file: policies.md
+    section: "12. Using Project Sources"
+    always: true
+    priority: 5
+
+  # ---- nomenclature.md: naming and structure standards ------------------------------------------------------------
+  - file: nomenclature.md
+    section: "1. General Conventions"
+    always: true
+    priority: 30
+  - file: nomenclature.md
+    section: "2. Document Control & Versioning"
+    always: true
+    priority: 30
+  - file: nomenclature.md
+    section: "3. Identifiers"
+    always: true
+    priority: 30
+  - file: nomenclature.md
+    section: "4. Business Requirements Document (BRD)"
+    applies_to: {doc_types: [BRD]}
+    priority: 30
+  - file: nomenclature.md
+    section: "5. Specifications (Functional / API)"
+    applies_to: {doc_types: [SPEC]}
+    priority: 30
+  - file: nomenclature.md
+    section: "6. User Stories"
+    applies_to: {doc_types: [USER-STORIES]}
+    priority: 30
+  - file: nomenclature.md
+    section: "7. Test Cases"
+    applies_to: {doc_types: [TESTCASES, TEST-PLAN]}
+    priority: 30
+  - file: nomenclature.md
+    section: "8. Severity (defects and risks)"
+    always: true
+    priority: 40
+  - file: nomenclature.md
+    section: "9. Project Module Codes – ecommerce-checkout-revamp (project code `CHK`)"
+    always: true
+    priority: 30
+  - file: nomenclature.md
+    section: "10. Jira Keys, Feature Flags and Release Names"
+    applies_to: {doc_types: [USER-STORIES, TEST-PLAN, CHANGE-REQUEST]}
+    priority: 40
+  - file: nomenclature.md
+    section: "11. Test Plans"
+    applies_to: {doc_types: [TEST-PLAN]}
+    priority: 30
+  - file: nomenclature.md
+    section: "12. Change Requests"
+    applies_to: {doc_types: [CHANGE-REQUEST]}
+    priority: 30
+
+  # ---- rules/security.md -----------------------------------------------------------------------------------------
+  - file: rules/security.md
+    section: "R-SEC-01 Card data stays in gateway-hosted fields"
+    applies_to: {doc_types: [BRD, SPEC, TESTCASES, TEST-PLAN], tags: [payments, security]}
+    priority: 10
+  - file: rules/security.md
+    section: "R-SEC-02 Gateway webhooks are verified before use"
+    applies_to: {doc_types: [SPEC, TESTCASES], tags: [payments, api]}
+    priority: 15
+  - file: rules/security.md
+    section: "R-SEC-03 Saved cards are tokens only, with consent"
+    applies_to: {doc_types: [BRD, SPEC, USER-STORIES, TESTCASES], tags: [payments, privacy]}
+    priority: 15
+  - file: rules/security.md
+    section: "R-SEC-04 Money values are re-validated on the server"
+    applies_to: {doc_types: [SPEC, TESTCASES], tags: [payments, coupons, cod]}
+    priority: 15
+  - file: rules/security.md
+    section: "R-SEC-05 Order and refund changes are audit-logged"
+    applies_to: {doc_types: [SPEC, TESTCASES], tags: [payments, refunds]}
+    priority: 20
+  - file: rules/security.md
+    section: "R-SEC-06 Access is stated per role for every admin function"
+    applies_to: {doc_types: [BRD, SPEC, USER-STORIES], tags: [security, governance]}
+    priority: 25
+
+  # ---- rules/payments.md -----------------------------------------------------------------------------------------
+  - file: rules/payments.md
+    section: "R-PAY-01 Gateway failover thresholds"
+    applies_to: {doc_types: [BRD, SPEC, TESTCASES, TEST-PLAN], tags: [payments]}
+    priority: 20
+  - file: rules/payments.md
+    section: "R-PAY-02 Payment operations are idempotent"
+    applies_to: {doc_types: [SPEC, TESTCASES], tags: [payments, api]}
+    priority: 20
+  - file: rules/payments.md
+    section: "R-PAY-03 Payment retry keeps the cart"
+    applies_to: {doc_types: [BRD, SPEC, USER-STORIES, TESTCASES], tags: [payments, checkout]}
+    priority: 20
+  - file: rules/payments.md
+    section: "R-PAY-04 Failed-but-debited payments are refunded automatically"
+    applies_to: {doc_types: [BRD, SPEC, TESTCASES], tags: [payments, refunds]}
+    priority: 10
+  - file: rules/payments.md
+    section: "R-PAY-05 Payment events carry reconciliation keys"
+    applies_to: {doc_types: [SPEC, USER-STORIES, TESTCASES], tags: [payments, api]}
+    priority: 20
+  - file: rules/payments.md
+    section: "R-PAY-06 UPI intent and QR time out after five minutes"
+    applies_to: {doc_types: [SPEC, USER-STORIES, TESTCASES], tags: [payments]}
+    priority: 25
+  - file: rules/payments.md
+    section: "R-PAY-07 Wallets have no fallback gateway"
+    applies_to: {doc_types: [BRD, SPEC], tags: [payments]}
+    priority: 25
+
+  # ---- rules/commerce.md -----------------------------------------------------------------------------------------
+  - file: rules/commerce.md
+    section: "R-CPN-01 One coupon per order"
+    applies_to: {doc_types: [BRD, SPEC, USER-STORIES, TESTCASES], tags: [coupons]}
+    priority: 20
+  - file: rules/commerce.md
+    section: "R-CPN-02 Coupon types and the percentage cap"
+    applies_to: {doc_types: [BRD, SPEC, TESTCASES], tags: [coupons]}
+    priority: 20
+  - file: rules/commerce.md
+    section: "R-CPN-03 Invalid coupons show a specific reason"
+    applies_to: {doc_types: [SPEC, USER-STORIES, TESTCASES], tags: [coupons, ux]}
+    priority: 20
+  - file: rules/commerce.md
+    section: "R-COD-01 COD eligibility"
+    applies_to: {doc_types: [BRD, SPEC, USER-STORIES, TESTCASES], tags: [cod]}
+    priority: 20
+  - file: rules/commerce.md
+    section: "R-COD-02 COD exclusions and fee"
+    applies_to: {doc_types: [BRD, SPEC, USER-STORIES, TESTCASES], tags: [cod]}
+    priority: 20
+  - file: rules/commerce.md
+    section: "R-COD-03 New-customer COD limit is undecided"
+    applies_to: {doc_types: [BRD, SPEC, USER-STORIES, TESTCASES, TEST-PLAN], tags: [cod]}
+    priority: 5
+  - file: rules/commerce.md
+    section: "R-DLV-01 Pincode serviceability and delivery estimate"
+    applies_to: {doc_types: [BRD, SPEC, USER-STORIES, TESTCASES], tags: [logistics, checkout]}
+    priority: 25
+
+  # ---- rules/ux-and-accessibility.md -----------------------------------------------------------------------------
+  - file: rules/ux-and-accessibility.md
+    section: "R-ACC-01 WCAG 2.1 AA for every checkout screen"
+    applies_to: {doc_types: [BRD, SPEC, USER-STORIES, TESTCASES], tags: [accessibility, ux]}
+    priority: 20
+  - file: rules/ux-and-accessibility.md
+    section: "R-ACC-02 Every control has a programmatic label"
+    applies_to: {doc_types: [SPEC, USER-STORIES, TESTCASES], tags: [accessibility]}
+    priority: 25
+  - file: rules/ux-and-accessibility.md
+    section: "R-UX-01 Checkout takes at most three steps on mobile"
+    applies_to: {doc_types: [BRD, SPEC, USER-STORIES], tags: [ux, checkout]}
+    priority: 25
+  - file: rules/ux-and-accessibility.md
+    section: "R-UX-02 No pre-ticked boxes or dark patterns"
+    applies_to: {doc_types: [BRD, SPEC, USER-STORIES, TESTCASES], tags: [ux, privacy]}
+    priority: 20
+  - file: rules/ux-and-accessibility.md
+    section: "R-UX-03 Total price is shown before payment"
+    applies_to: {doc_types: [BRD, SPEC, TESTCASES], tags: [ux, payments]}
+    priority: 20
+  - file: rules/ux-and-accessibility.md
+    section: "R-UX-04 Guest checkout asks for email first, then phone"
+    applies_to: {doc_types: [BRD, SPEC, USER-STORIES], tags: [ux, checkout]}
+    priority: 30
+
+  # ---- rules/quality-and-testing.md ------------------------------------------------------------------------------
+  - file: rules/quality-and-testing.md
+    section: "R-QA-01 Limits are tested on the boundary"
+    applies_to: {doc_types: [TESTCASES, TEST-PLAN], stages: [design, build, test]}
+    priority: 20
+  - file: rules/quality-and-testing.md
+    section: "R-QA-02 Test data is synthetic and gateway-provided"
+    applies_to: {doc_types: [TESTCASES, TEST-PLAN]}
+    priority: 10
+  - file: rules/quality-and-testing.md
+    section: "R-QA-03 Performance tests use the stated targets"
+    applies_to: {doc_types: [TESTCASES, TEST-PLAN], tags: [performance]}
+    priority: 25
+  - file: rules/quality-and-testing.md
+    section: "R-QA-04 Both states of the checkout_v2 flag are covered"
+    applies_to: {doc_types: [TESTCASES, TEST-PLAN], stages: [test, release]}
+    priority: 25
+  - file: rules/quality-and-testing.md
+    section: "R-QA-05 Each error message is tested by its text"
+    applies_to: {doc_types: [TESTCASES]}
+    priority: 30
+
+  # ---- rules/governance.md ---------------------------------------------------------------------------------------
+  - file: rules/governance.md
+    section: "R-GOV-01 Work outside the SOW is a change request"
+    applies_to: {doc_types: [BRD, USER-STORIES, CHANGE-REQUEST], tags: [governance]}
+    priority: 10
+  - file: rules/governance.md
+    section: "R-GOV-02 Known SOW exclusions"
+    applies_to: {doc_types: [BRD, SPEC, USER-STORIES, CHANGE-REQUEST]}
+    priority: 15
+  - file: rules/governance.md
+    section: "R-GOV-03 Rollout dates and the sale code freeze"
+    applies_to: {doc_types: [BRD, TEST-PLAN, CHANGE-REQUEST], tags: [governance]}
+    priority: 25
+  - file: rules/governance.md
+    section: "R-GOV-04 Open decisions are listed, not resolved"
+    always: true
+    priority: 5
+  - file: rules/governance.md
+    section: "R-GOV-05 Deferred requests stay out of scope"
+    applies_to: {doc_types: [BRD, USER-STORIES, CHANGE-REQUEST]}
+    priority: 25
+
+  # ---- rules/api-and-events.md -----------------------------------------------------------------------------------
+  - file: rules/api-and-events.md
+    section: "R-API-01 Error codes follow ERR-<MOD>-<NNN>"
+    applies_to: {doc_types: [SPEC, TESTCASES], tags: [api]}
+    priority: 30
+  - file: rules/api-and-events.md
+    section: "R-API-02 Mutating calls accept an idempotency key"
+    applies_to: {doc_types: [SPEC], tags: [api, payments]}
+    priority: 30
+  - file: rules/api-and-events.md
+    section: "R-API-03 Events use dotted lower-case names and a common envelope"
+    applies_to: {doc_types: [SPEC, USER-STORIES], tags: [api]}
+    priority: 30
+  - file: rules/api-and-events.md
+    section: "R-API-04 Public paths are versioned"
+    applies_to: {doc_types: [SPEC], tags: [api]}
+    priority: 40
+
+templates:
+  - type: BRD
+    variant: brd-template
+    default: true
+  - type: BRD
+    variant: brd-payments-template
+    applies_to: {tags: [payments, refunds]}
+  - type: SPEC
+    variant: functional-spec-template
+    default: true
+  - type: SPEC
+    variant: api-spec-template
+    applies_to: {tags: [api]}
+  - type: TESTCASES
+    variant: test-case-template
+    default: true
+  - type: USER-STORIES
+    variant: user-story-template
+    default: true
+  - type: TEST-PLAN
+    variant: test-plan-template
+    default: true
+  - type: CHANGE-REQUEST
+    variant: cr-impact-template
+    default: true
+
+# Hints for how project-data/ is organised. Informational today; later used to prefer sources per template section.
+project_data:
+  folders:
+    requirements: Epics and business rules agreed with the business
+    architecture: Technical design and non-functional targets
+    compliance: Mandatory constraints (treated as binding, see policies.md POL-REG-001)
+    meeting-notes: Decisions and open items, dated
+    emails: Dated decisions sent by email
+    change-requests: Scope changes and their status
+    contracts: Commercial scope and exclusions (SOW)
+    stakeholders: Roles and RACI
+    charter: Goals, KPIs and timeline
+    legacy: Current (as-is) behaviour
+    ux: Screens and journeys
+    jira-export: Backlog export, one row per story
+    raid: Risks, assumptions, issues and dependencies
+    analytics: Funnel and experiment data
+  glossary: project-data/glossary.md

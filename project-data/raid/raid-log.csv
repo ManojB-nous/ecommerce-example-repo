@@ -4,3 +4,8 @@ RSK-002,Risk,Logistics serviceability API p95 900 ms slows step 1,Medium,Logisti
 ISS-001,Issue,COD new-customer limit undecided,Medium,Finance Controller,Open
 DEP-001,Dependency,PayU production keys for fallback,,Payments Lead,Open
 ASM-001,Assumption,Google Places API quota sufficient for 3000 orders/min peak,,Front-end Lead,To verify
+RSK-003,Risk,Gateway sandbox may behave differently from production for UPI timeouts,Medium,Payments Lead,Open
+RSK-004,Risk,Accessibility fixes (CHK-110) may need late design changes,Medium,UX Lead,Open
+ISS-002,Issue,Order event envelope not yet agreed with Finance (gateway_txn_id and attempt_no are agreed),Low,Payments Lead,Open
+DEP-002,Dependency,Logistics API sandbox access for QA,Medium,Logistics Integration Manager,Closed
+ASM-002,Assumption,Razorpay and PayU sandboxes support UPI intent and QR flows,,QA Lead,To verify

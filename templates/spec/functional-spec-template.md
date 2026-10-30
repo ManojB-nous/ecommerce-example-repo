@@ -53,11 +53,17 @@ query: "performance availability response time concurrent users SLA security acc
 | Category | Requirement | Target |
 |----------|-------------|--------|
 
-## 8. Traceability Matrix
+## 8. Error Handling & Messages
+<!-- astra:section id=errors
+query: "error states messages payment failed coupon invalid pincode not serviceable retry" -->
+| Error state | Message shown | Recovery | Error code |
+|-------------|---------------|----------|------------|
+
+## 9. Traceability Matrix
 <!-- astra:auto  BR → FR -->
 
-## 9. Open Questions
+## 10. Open Questions
 <!-- astra:section id=open_questions query: "open questions TBD" -->
 
-## 10. Sources
+## 11. Sources
 <!-- astra:auto -->

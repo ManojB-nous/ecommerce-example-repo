@@ -13,6 +13,10 @@ nomenclature: [NOM-GEN-*, NOM-DOC-*, NOM-ID-*, NOM-TST-*]
 <!-- astra:section id=test_scope
 query: "scope features modules to test environments" -->
 
+## Test Environment
+<!-- astra:section id=test_env
+query: "environment QA UAT feature flag checkout_v2 gateway sandbox test cards" -->
+
 ## Test Data Notes
 <!-- astra:section id=test_data
 query: "test data sample values limits boundaries valid invalid" -->
@@ -26,3 +30,6 @@ query: "functional requirements acceptance criteria validation rules error handl
 
 ## Coverage Summary
 <!-- astra:auto  FR → count of TCs by type -->
+
+## Open Questions
+<!-- astra:section id=open_questions query: "open questions TBD decision pending" -->
